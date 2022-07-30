@@ -10,10 +10,25 @@
 		 order by board_idx desc	
 	</select>
 	
-	<insert id="insertBoard" parameterType="board.dto.BoardDto">
+<!--	 
+		useGeneratedKeys : DBMS가 자동 생성한 키를 사용
+		keyProperty : 반환되는 키
+	 -->
+	<insert id="insertBoard" parameterType="board.dto.BoardDto"
+		useGeneratedKeys="true" keyProperty="boardIdx">
 		insert into t_board(title, contents, created_datetime, creator_id)
 		values (#{title}, #{contents}, now(), 'admin')
 	</insert>
+	
+	<insert id="insertBoardFileList" parameterType="board.dto.BoardFileDto">
+		insert into t_file 
+			( board_idx, original_file_name, stored_file_path, file_size, creator_id, created_datetime ) 
+		values 
+		<foreach collection="list" item="item" separator=",">
+			( #{item.boardIdx}, #{item.originalFileName}, #{item.storedFilePath}, #{item.fileSize}, 'admin', now() )
+		</foreach>
+	</insert>
+
 	
 	<select id="selectBoardDetail" parameterType="int" resultType="board.dto.BoardDto">
 		select board_idx, title, hit_cnt, 
@@ -23,6 +38,20 @@
 		 where deleted_yn = 'N'
            and board_idx = ${boardIdx}  	
 	</select>
+	
+	<select id="selectBoardFileList" parameterType="int" resultType="board.dto.BoardFileDto">
+		select idx, board_idx, original_file_name, format(round(file_size/1024), 0) as file_size
+		  from t_file
+		 where board_idx = #{boardIdx} and deleted_yn = 'N' 
+	</select>	
+	
+	<select id="selectBoardFileInfo" parameterType="map" resultType="board.dto.BoardFileDto">
+		select original_file_name, stored_file_path, file_size
+		  from t_file
+		 where idx = #{idx} and board_idx = #{boardIdx} and deleted_yn = 'N' 
+	</select>
+
+	
 	<update id="updateHitCount" parameterType="int">
 		update t_board 
 		   set hit_cnt = hit_cnt + 1 

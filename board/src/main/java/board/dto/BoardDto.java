@@ -1,5 +1,7 @@
 package board.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
 // T_BOARD 테이블에 데이터를 담는 객체 
@@ -17,4 +19,9 @@ public class BoardDto {
 	private String createdDateTime;
 	private String updaterId;
 	private String updatedDateTime;
+	
+	// 첨부 파일 정보를 저장할 필드를 정의
+	private List<BoardFileDto> fileInfoList;
+
+
 }

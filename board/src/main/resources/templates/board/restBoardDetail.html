@@ -7,9 +7,12 @@
 </head>
 <body>
 	<div class="container">
-		<h2>게시판 상세</h2>
+		<h2>REST 게시판 상세</h2>
 		<form id="frm" method="post">
 			<input type="hidden" id="boardIdx" name="boardIdx" th:value="${board.boardIdx}" />
+			
+			<!-- HiddenHttpMethodFilter에서 요청 방식 결정하는데 사용 -->
+			<input type="hidden" id="method" name="_method" />
 			
 			<table class="board_detail">
 				<colgroup>
@@ -51,7 +54,7 @@
 			<!-- | 기호를 사용하면 변수와 고정된 문자열을 혼합해서 출력이 가능 -->
 			<a th:each="list : ${board.fileInfoList}"
 			   th:text="|${list.originalFileName} (${list.fileSize}kb)|"
-			   th:href="@{/board/downloadBoardFile.do(idx=${list.idx}, boardIdx=${list.boardIdx})}"></a>
+			   th:href="@{/board/file(idx=${list.idx}, boardIdx=${list.boardIdx})}"></a>
 		</div>
 		
 		<input type="button" id="list"   class="btn" value="목록으로" />
@@ -61,20 +64,24 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 		<script>
 			$(function() {
+				var boardIdx = $('#boardIdx').val();
+				
 				$('#list').on('click', function() {
-					location.href = 'openBoardList.do';	
+					location.href = '/board';	
 				});
 				$('#update').on('click', function() {
+					$('#method').val('PUT');
 					let frm = $('#frm')[0];
-					frm.action = 'updateBoard.do';
+					frm.action = '/board/' + boardIdx;
 					frm.submit();
 				});
 				$('#delete').on('click', function() {
+					$('#method').val('DELTE');
 					let frm = $('#frm')[0];
-					frm.action = 'deleteBoard.do';
+					frm.action = '/board/' + boardIdx; 
 					frm.submit();
 				});
-			});	
+			});
 		</script>
 	</div>
 </body>
