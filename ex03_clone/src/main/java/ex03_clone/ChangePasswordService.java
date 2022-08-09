@@ -1,5 +1,8 @@
 package ex03_clone;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ChangePasswordService {
 	private MemberDao memberDao;
 	

@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component	//public MemberDao memberDao() { return new MemberDao(); }
 public class MemberDao {
 	//회원 아이디
 	private static long nextId = 0;

@@ -2,6 +2,9 @@ package ex03_clone;
 
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberRegisterService {
 
 	private  MemberDao memberDao;

@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import assembler.Assembler;
 import config.AppCtx;
 import ex03_clone.ChangePasswordService;
 import ex03_clone.DuplicateMemberException;
@@ -15,6 +14,7 @@ import ex03_clone.MemberInfoPrinter;
 import ex03_clone.MemberListPrinter;
 import ex03_clone.MemberRegisterService;
 import ex03_clone.RegisterRequest;
+import ex03_clone.VersionPrinter;
 
 public class MainForSpring {
 	
@@ -24,6 +24,8 @@ public class MainForSpring {
 	// exit => 프로그램 종료
 	
 	public static void main(String[] args) throws IOException{
+		// ctx = new AnnotationConfigApplicationContext(AppCtx.class);
+		// ctx = new AnnotationConfigApplicationContext(AppConf1.class, AppConf2.class);
 		ctx = new AnnotationConfigApplicationContext(AppCtx.class);
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -52,19 +54,29 @@ public class MainForSpring {
 				processInfoCommand(command.split(" "));
 				continue;
 			}
+			
+			else if (command.startsWith("version")) {
+				processVersionCommand(command.split(" "));
+				continue;
+			}
 			printHelp();
 		}
 	}
 	
+	private static void processVersionCommand(String[] args) {
+		VersionPrinter versionPrinter = ctx.getBean("versionPrinter", VersionPrinter.class);
+		versionPrinter.print();
+	}
+
 	private static void processInfoCommand(String[] args) {
-		MemberInfoPrinter memberInfoPrinter = ctx.getBean("memberInfoPrinter", MemberInfoPrinter.class);
+		MemberInfoPrinter memberInfoPrinter = ctx.getBean("infoPrinter", MemberInfoPrinter.class);
 		memberInfoPrinter.printMemberInfo(args[1]);
 	}
 
 //	private static Assembler assembler = new Assembler();
 	
 	private static void processListCommand(String[] args) {
-		MemberListPrinter memberListPrinter = ctx.getBean("memberListPrinter", MemberListPrinter.class);
+		MemberListPrinter memberListPrinter = ctx.getBean("listPrinter", MemberListPrinter.class);
 		memberListPrinter.printAll();
 	}
 
@@ -76,7 +88,7 @@ public class MainForSpring {
 		}
 		
 //		MemberRegisterService regSvc = assembler.getRegSvc();
-		MemberRegisterService regSvc = ctx.getBean("memberRegSvc", MemberRegisterService.class);
+		MemberRegisterService regSvc = ctx.getBean(MemberRegisterService.class);
 		RegisterRequest req = new RegisterRequest();
 		req.setEmail(args[1]);
 		req.setName(args[2]);
@@ -103,7 +115,7 @@ public class MainForSpring {
 		}
 		
 //		ChangePasswordService changePwdSvc = assembler.getPwdSvc();
-		ChangePasswordService changePwdSvc = ctx.getBean("changePwdSvc", ChangePasswordService.class);
+		ChangePasswordService changePwdSvc = ctx.getBean(ChangePasswordService.class);
 				
 		try {
 			changePwdSvc.changePassword(args[1], args[2], args[3]);
