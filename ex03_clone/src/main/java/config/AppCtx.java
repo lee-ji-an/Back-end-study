@@ -4,17 +4,33 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 
+import aspect.ExeTimeAspect;
 import ex03_clone.MemberPrinter;
 import ex03_clone.MemberSummaryPrinter;
 import ex03_clone.VersionPrinter;
 import ex04.Client;
 import ex04.Client2;
+import ex05.Calculator;
+import ex05.RecCalculator;
 
 @Configuration
 @ComponentScan(basePackages = { "ex03_clone" })
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AppCtx {
+	
+	@Bean
+	public ExeTimeAspect exeTimeAspect() {
+		return new ExeTimeAspect();
+	}
+	
+	@Bean
+	public Calculator calculator() {
+		return new RecCalculator();
+	}
+
 	
 	@Bean(initMethod = "connect", destroyMethod = "close")
 	@Scope("prototype")
@@ -24,12 +40,12 @@ public class AppCtx {
 		return c;
 	}
 	
-	@Bean
-	public Client client() {
-		Client c = new Client();
-		c.setHost("www.myhost.com");
-		return c;
-	}
+//	@Bean
+//	public Client client() {
+//		Client c = new Client();
+//		c.setHost("www.myhost.com");
+//		return c;
+//	}
 	
 	@Bean
 	public VersionPrinter versionPrinter() {
