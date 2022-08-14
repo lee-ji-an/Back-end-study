@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 
+import aspect.CacheAspect;
 import aspect.ExeTimeAspect;
 import ex03_clone.MemberPrinter;
 import ex03_clone.MemberSummaryPrinter;
 import ex03_clone.VersionPrinter;
-import ex04.Client;
 import ex04.Client2;
 import ex05.Calculator;
 import ex05.RecCalculator;
@@ -21,6 +21,10 @@ import ex05.RecCalculator;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AppCtx {
 	
+	@Bean
+	public CacheAspect cacheAspect() {
+		return new CacheAspect();
+	}
 	@Bean
 	public ExeTimeAspect exeTimeAspect() {
 		return new ExeTimeAspect();
