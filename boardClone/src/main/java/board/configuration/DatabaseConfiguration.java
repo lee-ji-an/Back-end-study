@@ -35,7 +35,6 @@ public class DatabaseConfiguration {
 		return dataSource;
 	}
 	
-	// 데이터베이스의 연결과 SQL의 실행에 대한 모든 것을 가진 객체
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
@@ -47,7 +46,6 @@ public class DatabaseConfiguration {
 		return sqlSessionFactoryBean.getObject();
 	}
 	
-	// SqlSession을 구현하고 코드에서 SqlSession을 대체하는 역할을 수행 
 	@Bean
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
@@ -58,5 +56,4 @@ public class DatabaseConfiguration {
 	public org.apache.ibatis.session.Configuration mybatisConfig() {
 		return new org.apache.ibatis.session.Configuration();
 	}	
-
 }

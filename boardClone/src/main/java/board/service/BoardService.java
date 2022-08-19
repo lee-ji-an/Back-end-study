@@ -1,13 +1,13 @@
-package board.mapper;
+package board.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import board.dto.BoardDto;
 
-@Mapper
-public interface BoardMapper {
+public interface BoardService {
 
 	public List<BoardDto> selectBoardList() throws Exception;
+
 }
+
+
