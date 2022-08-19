@@ -8,6 +8,8 @@ public interface BoardService {
 
 	public List<BoardDto> selectBoardList() throws Exception;
 
+	public void insertBoard(BoardDto board);
+
 }
 
 

@@ -11,4 +11,6 @@ public interface BoardMapper {
 
 	public List<BoardDto> selectBoardList() throws Exception;
 
+	public void insertBoard(BoardDto board);
+
 }
