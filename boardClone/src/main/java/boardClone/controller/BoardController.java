@@ -18,15 +18,15 @@ public class BoardController {
 	private BoardService boardService;
 	
 	//		상세 정보 조회
-//	@RequestMapping("board/openBoardDetail.do")
-//	public ModelAndView openBoardDetail(@RequestParam int boardIdx) throws Exception{
-//		ModelAndView mv = new ModelAndView("/board/boardDetail");
-//		
-//		BoardDto board = boardService.selectBoardDetail(boardIdx);
-//		mv.addObject("board", board);
-//		
-//		return mv;
-//	}
+	@RequestMapping("/boardClone/openBoardDetail.do")
+	public ModelAndView openBoardDetail(@RequestParam int boardIdx) throws Exception{
+		ModelAndView mv = new ModelAndView("/board/boardDetail");
+		
+		BoardDto board = boardService.selectBoardDetail(boardIdx);
+		mv.addObject("board", board);
+					//"변수이름", 변수에 넣을 데이터 값
+		return mv;
+	}
 	
 	
 	//		글쓰기 페이지에 대한 요청 처리

@@ -10,7 +10,7 @@ public interface BoardService {
 
 	public void insertBoard(BoardDto board);
 
-//	public BoardDto selectBoardDetail(int boardIdx);
+	public BoardDto selectBoardDetail(int boardIdx);
 
 }
 

@@ -13,6 +13,10 @@ public interface BoardMapper {
 
 	public void insertBoard(BoardDto board);
 
+	public BoardDto selectBoardDetail(int boardIdx);
+
+	public void updateHitCount(int boardIdx);
+
 
 
 }

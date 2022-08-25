@@ -10,10 +10,25 @@
 		 order by board_idx desc	
 	</select>
 	
+	<select id="selectBoardDetail" parameterType="int" resultType="boardClone.dto.BoardDto">
+		select board_idx, title, hit_cnt, 
+		       date_format(created_datetime, '%Y.%m.%d %H:%i:%s') as created_datetime,
+		       contents, creator_id
+		  from t_board
+		 where deleted_yn = 'N'		<!-- 삭제여부가 'N'이면서 boardIdx가 일치하는 것 -->
+		 and board_idx = ${boardIdx} <!-- 찾고자하는 idx만 고름 -->	
+	</select>
+	
 	<insert id="insertBoard" parameterType="boardClone.dto.BoardDto">
 				<!-- 테이블이름(필드이름1, 필드이름2, ...) -->
 		insert into t_board(title, contents, created_datetime, creator_id)	
 				<!-- (데이터값1, 데이터값2, 데이터값3, ...) -->
 		values (#{title}, #{contents}, now(), 'admin')
 	</insert>
+	
+	<update id="updateHitCount" parameterType="int">
+		update t_board
+			set hit_cnt = hit_cnt + 1
+		where board_idx = ${boardIdx}
+	</update>
 </mapper>
