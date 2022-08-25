@@ -1,12 +1,12 @@
-package board.service;
+package boardClone.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import board.dto.BoardDto;
-import board.mapper.BoardMapper;
+import boardClone.dto.BoardDto;
+import boardClone.mapper.BoardMapper;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -23,5 +23,10 @@ public class BoardServiceImpl implements BoardService {
 	public void insertBoard(BoardDto board) {
 		boardMapper.insertBoard(board);
 	}
+
+//	@Override
+//	public BoardDto selectBoardDetail(int boardIdx) {
+//		return 
+//	}
 
 }

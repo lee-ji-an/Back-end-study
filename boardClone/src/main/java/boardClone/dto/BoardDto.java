@@ -1,4 +1,4 @@
-package board.dto;
+package boardClone.dto;
 
 import lombok.Data;
 

@@ -1,10 +1,10 @@
-package board.mapper;
+package boardClone.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import board.dto.BoardDto;
+import boardClone.dto.BoardDto;
 
 @Mapper
 public interface BoardMapper {
@@ -12,5 +12,7 @@ public interface BoardMapper {
 	public List<BoardDto> selectBoardList() throws Exception;
 
 	public void insertBoard(BoardDto board);
+
+
 
 }

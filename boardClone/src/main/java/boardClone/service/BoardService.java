@@ -1,8 +1,8 @@
-package board.service;
+package boardClone.service;
 
 import java.util.List;
 
-import board.dto.BoardDto;
+import boardClone.dto.BoardDto;
 
 public interface BoardService {
 
@@ -10,6 +10,7 @@ public interface BoardService {
 
 	public void insertBoard(BoardDto board);
 
-}
+//	public BoardDto selectBoardDetail(int boardIdx);
 
+}
 

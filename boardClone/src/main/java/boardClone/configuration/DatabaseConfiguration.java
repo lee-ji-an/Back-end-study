@@ -1,4 +1,4 @@
-package board.configuration;
+package boardClone.configuration;
 
 import javax.sql.DataSource;
 
