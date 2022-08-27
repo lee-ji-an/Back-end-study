@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="true">
+	
+	<!-- 로그 출력 형식과 위치를 설정 -->
+	<!-- 로그 출력 위치 (콘솔, 파일, DB 등) -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- 로그 출력 형식 -->
+		<encoder>
+			<!-- https://logback.qos.ch/manual/layouts.html -->
+			<!-- %d(로그 기록 시간) %5p(로깅 레벨) %c(로깅이 발생한 카테고리) %m(로그 메시지) %n(개행) -->
+			<Pattern>%d %5p {%c} %m%n</Pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="console-infolog" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>%d %5p %m%n</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- logger : 로그를 출력하는 요소 
+		 name 속성에 지정된 패키지 이하에 level 속성을 통해서 출력할 로그의 레벨을 조절해서 appender에 전달 -->
+	<logger name="boardClone" level="DEBUG" appender-ref="console" />
+	
+	<logger name="jdbc.sqlonly" level="INFO" appender-ref="sonsole-infolog" />
+	<logger name="jdbc.resultsettable" level="INFO" appender-ref="sonsole-infolog" />
+	
+	
+	<root level="off">
+		<appender-ref ref="console" />
+	</root>
+</configuration>

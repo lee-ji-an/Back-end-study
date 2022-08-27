@@ -12,5 +12,9 @@ public interface BoardService {
 
 	public BoardDto selectBoardDetail(int boardIdx);
 
+	public void updateBoard(BoardDto boardDto);
+
+	public void deleteBoard(int boardIdx);
+
 }
 
